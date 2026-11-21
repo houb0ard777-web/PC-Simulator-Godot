@@ -18,7 +18,7 @@ jobs:
         run: |
           unzip -o PC-Simulator-Godot-Prototype.zip -d extracted
           find extracted -type f | head -30
-          cp -r extracted/. .
+          rm -f .github/workflows/android.yml
           rm -rf extracted
 
       - name: Commit project
