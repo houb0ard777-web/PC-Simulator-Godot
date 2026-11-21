@@ -16,7 +16,7 @@ jobs:
 
       - name: Unpack ZIP
         run: |
-          unzip -o PC-Simulator-Godot-Prototype.zip -d .
+          rm -f .github/workflows/android.yml
           ls -la
 
       - name: Commit files
