@@ -14,17 +14,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Unpack ZIP
+      - name: Extract Godot ZIP
         run: |
-          rm -f .github/workflows/android.yml
-          ls -la
+          unzip -o PC-Simulator-Godot-Prototype.zip -d extracted
+          find extracted -type f | head -30
+          cp -r extracted/. .
+          rm -rf extracted
 
-      - name: Commit files
+      - name: Commit project
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "Unpack Godot project"
+            git commit -m "Extract Godot project"
             git push
           fi
