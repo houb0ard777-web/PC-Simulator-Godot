@@ -15,12 +15,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Extract Godot ZIP
-        run: |
+        run: |     
           unzip -o PC-Simulator-Godot-Prototype.zip -d extracted
-          find extracted -type f | head -30
-          rm -f .github/workflows/android.yml
+          find extracted -maxdepth 3 -type f
+          cp -rv extracted/. .
           rm -rf extracted
-
+          rm -f .github/workflows/android.yml
+          git status --short
       - name: Commit project
         run: |
           git config user.name "github-actions[bot]"
