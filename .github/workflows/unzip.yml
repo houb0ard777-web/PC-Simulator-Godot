@@ -10,18 +10,21 @@ permissions:
 jobs:
   unpack:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Extract Godot ZIP
-        run: |     
+        run: |
+          mkdir -p extracted
           unzip -o PC-Simulator-Godot-Prototype.zip -d extracted
           find extracted -maxdepth 3 -type f
           cp -rv extracted/. .
           rm -rf extracted
           rm -f .github/workflows/android.yml
           git status --short
+
       - name: Commit project
         run: |
           git config user.name "github-actions[bot]"
